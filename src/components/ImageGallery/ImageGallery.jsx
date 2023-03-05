@@ -11,6 +11,7 @@ export class ImageGallery extends Component {
     pictures: null,
     loading: false,
     page: 1,
+    isOpen: false,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -54,6 +55,7 @@ export class ImageGallery extends Component {
       setTimeout(() => this.loadMore(), 200);
     }
   };
+
   render() {
     return (
       <div>
@@ -65,6 +67,7 @@ export class ImageGallery extends Component {
               return <ImageGalleryItem key={item.id} item={item} />;
             })}
         </Gallery>
+
         {this.state.pictures && (
           <LoadMore handleClick={this.handleClick} type="button" />
         )}

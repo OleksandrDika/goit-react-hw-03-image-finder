@@ -7,6 +7,7 @@ import { Searchbar } from './Searchbar/Searchbar';
 export class App extends Component {
   state = {
     value: '',
+    showModal: true,
   };
   handleSubmit = value => {
     this.setState({ value });
@@ -16,7 +17,6 @@ export class App extends Component {
       <div>
         <Searchbar onSearch={this.handleSubmit} />
         <ImageGallery name={this.state.value} />
-        {/* {this.state.value && <LoadMore />} */}
 
         <GlobalStyle />
       </div>
