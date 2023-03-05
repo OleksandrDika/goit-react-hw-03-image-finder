@@ -1,5 +1,6 @@
 import { getPictures } from 'components/getPictures';
 import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
+import { Loader } from 'components/Loader/Loader';
 import { LoadMore } from 'components/LoadMore/LoadMore';
 
 import React, { Component } from 'react';
@@ -15,12 +16,20 @@ export class ImageGallery extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.name !== this.props.name) {
       // console.log(this.props.name);
-      getPictures(this.props.name, this.state.page)
-        .then(response => response.json())
-        .then(pictures => {
-          setTimeout(() => console.log(this.state.pictures), 1000);
-          this.setState({ pictures });
-        });
+      this.setState({ loading: true, page: 1, pictures: null });
+      setTimeout(
+        () =>
+          getPictures(this.props.name, this.state.page)
+            .then(response => response.json())
+            .then(pictures => {
+              setTimeout(() => console.log(this.state.pictures), 500);
+              this.setState({ pictures });
+            })
+            .finally(() => {
+              this.setState({ loading: false });
+            }),
+        500
+      );
     }
   }
 
@@ -37,15 +46,18 @@ export class ImageGallery extends Component {
   };
 
   handleClick = e => {
-    console.log('rrrr');
-    this.setState(prevState => {
-      return { page: prevState.page + 1 };
-    });
-    this.loadMore();
+    if (this.state.page <= 41) {
+      console.log(this.state.page);
+      this.setState(prevState => {
+        return { page: prevState.page + 1 };
+      });
+      setTimeout(() => this.loadMore(), 200);
+    }
   };
   render() {
     return (
       <div>
+        {this.state.loading && <Loader />}
         <Gallery>
           {this.state.pictures &&
             this.state.pictures.hits.map(item => {
