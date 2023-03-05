@@ -21,7 +21,7 @@ export const Modal = ({ image, isOpen, onClose }) => {
       contentLabel="Example Modal"
     >
       <h2>Modal</h2>
-      <img src={image} alt="" width="1000" />
+      <img src={image} alt="" width="800" />
       <button onClick={onClose}>Close modal</button>
     </ReactModal>
   );
