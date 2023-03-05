@@ -19,6 +19,7 @@ export const Modal = ({ image, isOpen, onClose }) => {
       isOpen={isOpen}
       style={customStyles}
       contentLabel="Example Modal"
+      shouldCloseOnOverlayClick={true}
     >
       <h2>Modal</h2>
       <img src={image} alt="" width="800" />
