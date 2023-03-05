@@ -16,6 +16,7 @@ export class App extends Component {
       <div>
         <Searchbar onSearch={this.handleSubmit} />
         <ImageGallery name={this.state.value} />
+        {/* {this.state.value && <LoadMore />} */}
 
         <GlobalStyle />
       </div>
