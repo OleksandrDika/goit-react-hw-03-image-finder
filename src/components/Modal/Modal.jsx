@@ -8,6 +8,12 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+    padding: 0,
+    border: 'none',
+  },
+  overlay: {
+    zIndex: '1400',
+    backgroundColor: 'rgb(0, 0, 0, 0.6)',
   },
 };
 
@@ -16,14 +22,13 @@ ReactModal.setAppElement('#root');
 export const Modal = ({ image, isOpen, onClose }) => {
   return (
     <ReactModal
+      onRequestClose={() => onClose()}
       isOpen={isOpen}
       style={customStyles}
       contentLabel="Example Modal"
-      shouldCloseOnOverlayClick={true}
+      shouldCloseOnOverlayClick
     >
-      <h2>Modal</h2>
       <img src={image} alt="" width="800" />
-      <button onClick={onClose}>Close modal</button>
     </ReactModal>
   );
 };

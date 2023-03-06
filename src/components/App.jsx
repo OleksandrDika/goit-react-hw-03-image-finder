@@ -3,7 +3,7 @@ import { GlobalStyle } from './GlobalStyle';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 
 import { Searchbar } from './Searchbar/Searchbar';
-import { getPictures } from './getPictures';
+import { getPictures } from '../services/getPictures';
 import { LoadMore } from './LoadMore/LoadMore';
 import { Loader } from './Loader/Loader';
 
@@ -23,8 +23,7 @@ export class App extends Component {
       this.setState({ loading: true, error: '' });
       getPictures(this.state.value, page)
         .then(data => {
-          console.log(data);
-          if (data.hits.lenght === 0) {
+          if (data.hits.length === 0) {
             alert('There are no images for your request.');
             return;
           }
@@ -40,8 +39,8 @@ export class App extends Component {
             totalPictures: data.totalHits,
           }));
         })
-        .catch(() => {
-          this.setState({ error: 'error.message' });
+        .catch(error => {
+          this.setState({ error: error });
         })
         .finally(() => {
           this.setState({ loading: false });

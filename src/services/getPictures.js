@@ -8,6 +8,6 @@ export const getPictures = (name, page) => {
     if (response.ok) {
       return response.json();
     }
-    // return new Promise.reject(new error('Something went wrong'));
+    return Promise.reject(new Error('Something went wrong'));
   });
 };
